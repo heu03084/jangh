@@ -1,15 +1,22 @@
-#include <stdio.h>
-#include <string.h>
+#include <bits/stdc++.h>
+using namespace std;
+int h, cnt;
+// 특정한 시각 안에 '3'이 포함되어 있는지의 여부
+bool check(int h, int m, int s) {
+    if (h % 10 == 3 || m / 10 == 3 || m % 10 == 3 || s / 10 == 3 || s % 10 == 3)
+        return true;
+        return false;
+    }
 int main(void) {
-	char str[20];
-	scanf("%s", str); 
-	//첫번째 문자를 숫자로 변경한 값을 대입
-	int result = str[0] - '0';
-	for (int i = 1; i< strlen(str); i++) {
-	//두 수 중에서 하나라도 '0' 혹은 '1'인 경우, 곱하기보다는 더하기 수행
-		int num = str[i] - '0';
-		if (num <= 1 || result <= 1) result += num;
-		else result *= num;
-	}
-	printf("%d ", result ); 
+// H 입력 받기
+    cin >> h;
+        for (int i = 0; i <= h; i++) {
+            for (int j = 0; j < 60; j++) {
+                for (int k = 0; k < 60; k++) {
+                    if (check(i, j, k)) cnt++;
+                }
+            }
+        }
+    cout << cnt << '\n';
+    return 0;
 }

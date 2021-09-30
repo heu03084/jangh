@@ -1,20 +1,34 @@
-#include <stdio.h>
-int n, k;
-int result;
+#include <bits/stdc++.h>
+using namespace std;
+int n;
+string plans;
+int x = 1, y = 1;
+// L, R, U, D에 따른 이동 방향
+int dx[4] = {0, 0, -1, 1};
+int dy[4] = {-1, 1, 0, 0};
+char moveTypes[4] = {'L', 'R', 'U', 'D'};
 int main(void) {
-	scanf("%d %d", &n, &k );
-	while (1) {
-// N이 K로 나누어 떨어지는 수가 될 때까지 빼기
-		if ((n % k) == 0 ) {
-			n /= k; 
-		} else {
-			n = n -1; 
+	cin >> n;
+	cin.ignore(); // 버퍼 비우기
+	getline(cin, plans);
+// 이동 계획을 하나씩 확인하기
+	for (int i = 0; i < plans.size(); i++) {
+		char plan = plans[i];
+// 이동 후 좌표 구하기
+		int nx = -1, ny = -1;
+		for (int j = 0; j < 4; j++) {
+			if (plan == moveTypes[j]) {
+				nx = x + dx[j];
+				ny = y + dy[j];
+			}
 		}
-		result++; 
-		if (n < k) break;
+// 공간을 벗어나는 경우 무시
+		if (nx < 1 || ny < 1 || nx > n || ny > n) 
+		continue;
+// 이동 수행
+		x = nx;
+		y = ny;
 	}
-// 마지막으로 남은 수에 대하여 1씩 빼기
-	result += (n - 1);
-	printf("%d", result);
-	return 0; 
+	cout << x << ' ' << y << '\n';
+	return 0;
 }
